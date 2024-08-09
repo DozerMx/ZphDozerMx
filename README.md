@@ -20,7 +20,6 @@ Asegúrate de tener Termux instalado en tu dispositivo Android.
    pkg update -y && pkg upgrade -y
    ```
 2. **Instalar Git*
-3. 
    ```bash
    pkg install git -y
    ```
