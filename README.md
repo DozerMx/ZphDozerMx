@@ -39,7 +39,7 @@ Asegúrate de tener Termux instalado en tu dispositivo Android.
 6. **Clonar el repositorio**:
 
    ```bash
-   git clone https://github.com/3meses/ZphDozerMx.git
+   git clone https://github.com/DozerMx/ZphDozerMx.git
    ```
 
 7. **Cambiar al directorio del proyecto**:
@@ -95,7 +95,7 @@ Sigue estos pasos para instalar y configurar ZphDozerMx en Kali Linux.
 3. **Clonar el repositorio**:
 
    ```bash
-   git clone https://github.com/3meses/ZphDozerMx.git
+   git clone https://github.com/DozerMx/ZphDozerMx.git
    ```
 
 4. **Cambiar al directorio del proyecto**:
