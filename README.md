@@ -63,7 +63,7 @@ Asegúrate de tener Termux instalado en tu dispositivo Android.
 10. **Seleccionar la opción 1 en la terminal** para elegir el login de Facebook.
 
 
-
+# instalacion en kali Linux.
 
 
 
