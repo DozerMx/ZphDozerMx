@@ -59,7 +59,7 @@ Asegúrate de tener Termux instalado en tu dispositivo Android.
 8. **Ejecutar el script**:
 
    ```bash
-   python app.py
+   python zphdozer.py
    ```
 
 9. **Seleccionar la opción 1 en la terminal** para elegir el login de Facebook.
