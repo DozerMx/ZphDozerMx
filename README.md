@@ -20,44 +20,45 @@ Asegúrate de tener Termux instalado en tu dispositivo Android.
    pkg update -y && pkg upgrade -y
    ```
 2. **Instalar Git*
-   ``
+3. 
+   ```bash
    pkg install git -y
    ```
 
-3. **Instalar Python**:
+4. **Instalar Python**:
 
    ```bash
    pkg install python -y
    ```
 
-4. **Instalar OpenSSH** (para utilizar Serveo):
+5. **Instalar OpenSSH** (para utilizar Serveo):
 
    ```bash
    pkg install openssh -y
    ```
 
-5. **Clonar el repositorio desde GitHub**:
+6. **Clonar el repositorio desde GitHub**:
 
    ```bash
    git clone https://github.com/3meses/ZphDozerMx.git
    ```
 
-6. **Cambiar al directorio del proyecto**:
+7. **Cambiar al directorio del proyecto**:
 
    ```bash
    cd ZphDozerMx
    ```
 
-7. **Instalar las dependencias de Python**:
+8. **Instalar las dependencias de Python**:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-8. **Ejecutar el script**:
+9. **Ejecutar el script**:
 
    ```bash
    python zphdozer.py
    ```
 
-9. **Seleccionar la opción 1 en la terminal** para elegir el login de Facebook.
+10. **Seleccionar la opción 1 en la terminal** para elegir el login de Facebook.
