@@ -61,3 +61,66 @@ Asegúrate de tener Termux instalado en tu dispositivo Android.
    ```
 
 10. **Seleccionar la opción 1 en la terminal** para elegir el login de Facebook.
+
+
+
+
+
+
+```markdown
+# Instalación en Kali Linux
+
+Sigue estos pasos para instalar y configurar ZphDozerMx en Kali Linux.
+
+### Requisitos
+
+- Kali Linux
+- Conexión a Internet
+
+### Pasos de instalación
+
+1. **Actualizar el sistema**:
+
+   ```bash
+   sudo apt update
+   sudo apt upgrade
+   ```
+
+2. **Instalar Git, Python y pip**:
+
+   ```bash
+   sudo apt install git python3 python3-pip
+   ```
+
+3. **Clonar el repositorio**:
+
+   ```bash
+   git clone https://github.com/3meses/ZphDozerMx.git
+   ```
+
+4. **Cambiar al directorio del proyecto**:
+
+   ```bash
+   cd ZphDozerMx
+   ```
+
+5. **Crear y activar un entorno virtual (opcional, pero recomendado)**:
+
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+
+6. **Instalar las dependencias**:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+7. **Ejecutar el script**:
+
+   ```bash
+   python3 zphdozer.py
+   ```
+
+8. **Seleccionar la opción 1 en la terminal** para elegir el login de Facebook.
