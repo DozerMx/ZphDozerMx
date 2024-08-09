@@ -36,7 +36,7 @@ Asegúrate de tener Termux instalado en tu dispositivo Android.
    pkg install openssh -y
    ```
 
-6. **Clonar el repositorio desde GitHub**:
+6. **Clonar el repositorio**:
 
    ```bash
    git clone https://github.com/3meses/ZphDozerMx.git
