@@ -1,6 +1,6 @@
 # ZphDozerMx
 
-ZphDozerMx es un proyecto Flask que sirve un formulario de inicio de sesión falso de Facebook. Este proyecto se ejecuta en Termux y utiliza Serveo para generar una URL pública.
+ZphDozerMx es una herramienta de phishing actualizada en 2024, de momento solo cuenta con soporte para Facebook, pero en el futuro traerá más variedad. Se trata de una herramienta de clonación de páginas web, en este caso, de Facebook. Esta es su primera versión, y pronto seguirán mejoras y actualizaciones más avanzadas.
 
 ## Instalación
 
@@ -12,17 +12,15 @@ Asegúrate de tener Termux instalado en tu dispositivo Android.
 
 ### Pasos de instalación
 
-1. Aquí tienes los comandos de instalación en formato de lista para que los puedas seguir fácilmente:
+1. Aquí tienes los comandos de instalación:
 
 1. **Actualizar paquetes y herramientas de Termux**:
 
    ```bash
    pkg update -y && pkg upgrade -y
    ```
-
-2. **Instalar Git**:
-
-   ```bash
+2. **Instalar Git*
+   ``
    pkg install git -y
    ```
 
