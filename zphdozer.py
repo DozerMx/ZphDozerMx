@@ -1,8 +1,28 @@
 import os
 import uuid
+import hashlib
+import sys
 from flask import Flask, request, redirect
 import threading
 import subprocess
+
+# Función para verificar la integridad del código
+def verificar_integridad():
+    # Este hash debe ser generado después de escribir todo tu código y antes de implementarlo.
+    hash_original = "tu_hash_original_aquí"
+
+    # Leer el contenido del archivo y calcular el hash actual
+    with open(__file__, 'rb') as f:
+        contenido = f.read()
+        hash_actual = hashlib.sha256(contenido).hexdigest()
+
+    # Comparar el hash actual con el original
+    if hash_actual != hash_original:
+        print("Este código ha sido modificado de forma no autorizada.")
+        sys.exit()
+
+# Verificar la integridad del código antes de continuar
+verificar_integridad()
 
 # Configuración de Flask
 app = Flask(__name__)
@@ -264,8 +284,15 @@ def main():
         # Mostrar la URL pública con la opción elegida
         if url:
             print(f"URL pública: {url}/facebook_login")
+        else:
+            print("No se pudo obtener la URL de Serveo.")
+
+        # Esperar a que el servidor finalice
+        server_thread.join()
+
     else:
         print("Opción no válida. Saliendo.")
+        exit()
 
 if __name__ == '__main__':
     main()
