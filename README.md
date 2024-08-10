@@ -124,3 +124,14 @@ Sigue estos pasos para instalar y configurar ZphDozerMx en Kali Linux.
    ```
 
 8. **Seleccionar la opción 1 en la terminal** para elegir el login de Facebook.
+
+
+
+
+
+
+
+
+# ZphDozerMx © 2024 [DozerMxTZP]. Todos los derechos reservados.
+# Este software es propiedad de [DozerMx].
+# Se prohíbe la modificación, distribución o uso no autorizados sin el permiso explícito del titular de los derechos.
