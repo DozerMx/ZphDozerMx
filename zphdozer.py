@@ -9,7 +9,7 @@ import subprocess
 # Función para verificar la integridad del código
 def verificar_integridad():
     # Este hash debe ser generado después de escribir todo tu código y antes de implementarlo.
-    hash_original = "tu_hash_original_aquí"
+    hash_original = "da6ec275fc7132ba24e7e13779c787780206657cbfecc9acb56a3e668de02019"
 
     # Leer el contenido del archivo y calcular el hash actual
     with open(__file__, 'rb') as f:
