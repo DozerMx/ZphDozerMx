@@ -265,29 +265,31 @@ def main():
     print(banner)
 
     # Mostrar menú para selección de opciones
-       print("\nOpciones:")
-       print("1: Iniciar servidor")
-       print("2: Salir")
+def mostrar_menu():
+    print("\nOpciones:")
+    print("1: Iniciar servidor")
+    print("2: Salir")
 
-       opcion = input("Elige una opción (1/2): ").strip()
+    opcion = input("Elige una opción (1/2): ").strip()
 
-       if opcion == '1':
-           create_css()  # Crear archivo CSS
-           server_thread = threading.Thread(target=run_server)
-           server_thread.daemon = True
-           server_thread.start()
-           print("Servidor en ejecución en http://localhost:5001")
-           url_serveo = start_serveo()
-           if url_serveo:
-               print(f"Tu servidor está disponible en: {url_serveo}")
-           else:
-               print("No se pudo obtener la URL de Serveo.")
-           input("Presiona Enter para salir...")
-       elif opcion == '2':
-           print("Saliendo...")
-           sys.exit()
-       else:
-           print("Opción inválida. Inténtalo de nuevo.")
+    if opcion == '1':
+        create_css()  # Crear archivo CSS
+        server_thread = threading.Thread(target=run_server)
+        server_thread.daemon = True
+        server_thread.start()
+        print("Servidor en ejecución en http://localhost:5001")
+        url_serveo = start_serveo()
+        if url_serveo:
+            print(f"Tu servidor está disponible en: {url_serveo}")
+        else:
+            print("No se pudo obtener la URL de Serveo.")
+        input("Presiona Enter para salir...")
+    elif opcion == '2':
+        print("Saliendo...")
+        sys.exit()
+    else:
+        print("Opción inválida. Inténtalo de nuevo.")
+        mostrar_menu()  # Mostrar el menú nuevamente en caso de opción inválida
 
-   if __name__ == '__main__':
-       main()
+if __name__ == '__main__':
+    mostrar_menu()
