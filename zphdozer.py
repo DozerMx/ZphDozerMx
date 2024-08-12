@@ -8,7 +8,7 @@ import subprocess
 
 # Función para verificar la integridad del código
 def verificar_integridad():
-    hash_original = "da6ec275fc7132ba24e7e13779c787780206657cbfecc9acb56a3e668de02019"
+    hash_original = "f39ceb3e1a66b4e718a3f87874319c17cb8ca77971c0648325311d5547e9695c"
     with open(__file__, 'rb') as f:
         contenido = f.read()
         hash_actual = hashlib.sha256(contenido).hexdigest()
