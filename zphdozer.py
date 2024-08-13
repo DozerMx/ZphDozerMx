@@ -4,6 +4,7 @@ import subprocess
 import requests
 import threading
 import time
+import sys
 from flask import Flask, request, send_from_directory, jsonify
 
 # Configuración de Flask
@@ -33,24 +34,27 @@ def generate_unique_id():
 def run_server():
     app.run(host='0.0.0.0', port=5001)
 
-def start_ngrok():
-    process = subprocess.Popen(['ngrok', 'http', '5001'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    time.sleep(5)  # Esperar a que ngrok inicie
-    try:
-        response = requests.get('http://localhost:4040/api/tunnels')
-        response.raise_for_status()
-        tunnels = response.json().get('tunnels', [])
-        public_url = ''
-        for tunnel in tunnels:
-            if tunnel['proto'] == 'http':
-                public_url = tunnel['public_url']
-                break
-        if not public_url:
-            raise ConnectionError("No se encontró una URL pública.")
-        return public_url
-    except Exception as e:
-        print(f"Error al obtener la URL de ngrok: {e}")
+def start_serveo():
+    # Ejecutar Serveo y redirigir la salida para obtener la URL pública
+    process = subprocess.Popen(['ssh', '-R', '80:localhost:5001', 'serveo.net'],
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    time.sleep(10)  # Esperar a que Serveo inicie
+
+    stdout, stderr = process.communicate()
+    if process.returncode != 0:
+        print(f"Error al iniciar el túnel con Serveo: {stderr}")
         return None
+
+    # Buscar la URL pública en la salida
+    public_url = None
+    for line in stdout.splitlines():
+        if 'Forwarding' in line:
+            public_url = line.split('Forwarding')[1].strip()
+            break
+
+    if not public_url:
+        print("No se pudo encontrar la URL pública en la salida de Serveo.")
+    return public_url
 
 def main():
     unique_id = generate_unique_id()
@@ -76,11 +80,11 @@ def main():
             server_thread.daemon = True
             server_thread.start()
             print("Servidor en ejecución en http://localhost:5001")
-            url_ngrok = start_ngrok()
-            if url_ngrok:
-                print(f"Tu servidor está disponible en: {url_ngrok}")
+            url_serveo = start_serveo()
+            if url_serveo:
+                print(f"Tu servidor está disponible en: {url_serveo}")
             else:
-                print("No se pudo obtener la URL de ngrok.")
+                print("No se pudo obtener la URL de Serveo.")
             input("Presiona Enter para salir...")
         elif opcion == '2':
             print("Saliendo...")
