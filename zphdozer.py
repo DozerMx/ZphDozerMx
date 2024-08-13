@@ -34,15 +34,15 @@ def generate_unique_id():
 def run_server():
     app.run(host='0.0.0.0', port=5001)
 
-def start_serveo():
-    # Ejecutar Serveo y redirigir la salida para obtener la URL pública
-    process = subprocess.Popen(['ssh', '-R', '80:localhost:5001', 'serveo.net'],
+def start_localhost_run():
+    # Ejecutar localhost.run y redirigir la salida para obtener la URL pública
+    process = subprocess.Popen(['ssh', '-R', '80:localhost:5001', 'localhost.run'],
                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    time.sleep(10)  # Esperar a que Serveo inicie
+    time.sleep(10)  # Esperar a que localhost.run inicie
 
     stdout, stderr = process.communicate()
     if process.returncode != 0:
-        print(f"Error al iniciar el túnel con Serveo: {stderr}")
+        print(f"Error al iniciar el túnel con localhost.run: {stderr}")
         return None
 
     # Buscar la URL pública en la salida
@@ -53,7 +53,7 @@ def start_serveo():
             break
 
     if not public_url:
-        print("No se pudo encontrar la URL pública en la salida de Serveo.")
+        print("No se pudo encontrar la URL pública en la salida de localhost.run.")
     return public_url
 
 def main():
@@ -80,11 +80,11 @@ def main():
             server_thread.daemon = True
             server_thread.start()
             print("Servidor en ejecución en http://localhost:5001")
-            url_serveo = start_serveo()
-            if url_serveo:
-                print(f"Tu servidor está disponible en: {url_serveo}")
+            url_localhost_run = start_localhost_run()
+            if url_localhost_run:
+                print(f"Tu servidor está disponible en: {url_localhost_run}")
             else:
-                print("No se pudo obtener la URL de Serveo.")
+                print("No se pudo obtener la URL de localhost.run.")
             input("Presiona Enter para salir...")
         elif opcion == '2':
             print("Saliendo...")
